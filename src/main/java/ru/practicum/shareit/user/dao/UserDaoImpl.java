@@ -33,10 +33,8 @@ public class UserDaoImpl implements UserDao {
         if (user.getEmail() != null) {
             if (!users.containsKey(id))
                 throw new NotFoundUserException("Пользователя с " + id + " не существует");
-            if (users.values().stream().filter(u -> u.getId() != user.getId()).anyMatch(u ->
-                    u.getEmail().equals(user.getEmail()))) {
+            if (users.values().stream().map(User::getEmail).anyMatch(s -> s.equals(user.getEmail())))
                 throw new DuplicateEmailException("Пользователь с таким email уже существует: " + user.getEmail());
-            }
         } else
             users.get(user.getId()).setEmail(user.getEmail());
         return users.get(user.getId());
