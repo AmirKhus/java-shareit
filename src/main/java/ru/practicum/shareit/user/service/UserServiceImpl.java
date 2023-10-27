@@ -57,9 +57,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto delete(Long id) {
+    public void delete(Long id) {
         userRepository.delete(id);
-        return getById(id);
     }
 
     private void validateUniqueEmail(UserDto userDto) {

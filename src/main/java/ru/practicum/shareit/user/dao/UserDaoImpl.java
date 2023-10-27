@@ -42,6 +42,8 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void delete(Long id) {
+        System.out.println("users.containsKey(id) " + users.containsKey(id));
+        System.out.println(users.get(id));
         checkUser(id);
         users.remove(id);
     }

@@ -51,7 +51,7 @@ public class ItemController {
     }
 
     @DeleteMapping("/{itemId}")
-    public ItemDto deleteItem(@PathVariable Long itemId) {
-        return itemService.delete(itemId);
+    public void deleteItem(@PathVariable Long itemId) {
+        itemService.delete(itemId);
     }
 }

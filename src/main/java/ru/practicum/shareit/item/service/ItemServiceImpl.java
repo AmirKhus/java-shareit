@@ -69,11 +69,8 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public ItemDto delete(Long id) {
-        ItemDto itemDto = getById(id);
+    public void delete(Long id) {
         itemRepository.delete(id);
-
-        return itemDto;
     }
 
     @Override
