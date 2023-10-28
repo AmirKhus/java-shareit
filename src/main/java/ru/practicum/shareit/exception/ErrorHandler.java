@@ -53,13 +53,6 @@ public class ErrorHandler {
         return new ErrorResponse(e.getMessage());
     }
 
-    @ExceptionHandler(Throwable.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ErrorResponse handleThrowable(final Throwable e) {
-        log.error("500 {}", e.getMessage(), e);
-        return new ErrorResponse(e.getMessage());
-    }
-
     @ExceptionHandler(DuplicateEmailException.class)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ErrorResponse handleThrowable(final DuplicateEmailException e) {
