@@ -9,7 +9,7 @@ import java.util.*;
 
 @Repository
 public class UserDaoImpl implements UserDao {
-    Map<Long, User> users = new HashMap<>();
+    private Map<Long, User> users = new HashMap<>();
     private Long count = 0L;
 
 
