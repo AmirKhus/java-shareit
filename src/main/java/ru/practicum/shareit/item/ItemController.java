@@ -11,9 +11,7 @@ import ru.practicum.shareit.item.service.ItemService;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
-/**
- * TODO Sprint add-controllers.
- */
+
 @Slf4j
 @RestController
 @RequestMapping("/items")

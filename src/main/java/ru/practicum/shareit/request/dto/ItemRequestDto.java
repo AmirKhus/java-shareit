@@ -6,9 +6,6 @@ import ru.practicum.shareit.user.User;
 
 import java.sql.Date;
 
-/**
- * TODO Sprint add-item-requests.
- */
 @Data
 @Builder
 public class ItemRequestDto {
