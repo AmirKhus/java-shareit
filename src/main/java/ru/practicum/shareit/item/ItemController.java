@@ -2,9 +2,11 @@ package ru.practicum.shareit.item;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.shareit.MarkerValidate;
+import ru.practicum.shareit.comment.dto.CommentDto;
 import ru.practicum.shareit.item.dto.ItemDto;
 import ru.practicum.shareit.item.service.ItemService;
 
@@ -21,18 +23,24 @@ public class ItemController {
     private static final String HEADER_USER_ID = "X-Sharer-User-Id";
 
     @GetMapping
-    public List<ItemDto> getAllItemsByUser(@RequestHeader(HEADER_USER_ID) Long userId) {
-        return itemService.getItemByUser(userId);
+    public List<ItemDto> getAllItemsUser(@RequestHeader(HEADER_USER_ID) Long userId,
+                                         @RequestParam(required = false, defaultValue = "0") Integer from,
+                                         @RequestParam(required = false, defaultValue = "10") Integer size) {
+        log.info("List items User {}", userId);
+        return itemService.getItemsUser(userId,from,size);
     }
 
-    @GetMapping("{itemId}")
-    public ItemDto getItemById(@PathVariable Long itemId) {
-        return itemService.getById(itemId);
+    @GetMapping("/{itemId}")
+    public ItemDto getItemById(@RequestHeader(HEADER_USER_ID) Long userId,
+                               @PathVariable Long itemId) {
+        return itemService.getItemById(itemId, userId);
     }
 
     @GetMapping("search")
-    public List<ItemDto> searchItems(@RequestParam String text) {
-        return itemService.search(text);
+    public List<ItemDto> searchItems(@RequestParam String text,
+                                     @RequestParam(required = false, defaultValue = "0") Integer from,
+                                     @RequestParam(required = false, defaultValue = "10") Integer size) {
+        return itemService.search(text,from,size);
     }
 
     @PostMapping
@@ -51,5 +59,14 @@ public class ItemController {
     @DeleteMapping("/{itemId}")
     public void deleteItem(@PathVariable Long itemId) {
         itemService.delete(itemId);
+    }
+
+    @PostMapping("/{itemId}/comment")
+    public CommentDto addComment(@RequestHeader(HEADER_USER_ID) Long userId,
+                                                 @PathVariable Long itemId,
+                                                 @RequestBody CommentDto commentDto) {
+
+        log.info("User {} add comment for Item {}", userId, itemId);
+        return itemService.addComment(userId, itemId, commentDto);
     }
 }
