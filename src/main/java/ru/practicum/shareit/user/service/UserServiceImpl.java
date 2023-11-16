@@ -12,6 +12,7 @@ import ru.practicum.shareit.user.repository.UserRepository;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Objects;
 
 import static ru.practicum.shareit.user.dto.UserMapper.fromEntityUserDto;
 import static ru.practicum.shareit.user.dto.UserMapper.toUserDtoList;
@@ -62,7 +63,7 @@ public class UserServiceImpl implements UserService {
         if (user.getEmail() != null) {
             List<User> findEmail = userRepository.findByEmail(user.getEmail());
 
-            if (!findEmail.isEmpty() && findEmail.get(0).getId() != userId) {
+            if (!findEmail.isEmpty() && !Objects.equals(findEmail.get(0).getId(), userId)) {
                 throw new ConflictException("there is already a user with an email " + user.getEmail());
             }
             newUser.setEmail(user.getEmail());
