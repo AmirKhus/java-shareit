@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.validation.ValidationException;
+
 @Slf4j
 @RestControllerAdvice()
 public class ErrorHandler {
@@ -53,10 +55,31 @@ public class ErrorHandler {
         return new ErrorResponse(e.getMessage());
     }
 
+    @ExceptionHandler(ValidationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse handleValidationException(ValidationException e) {
+        log.error("400 {}", e.getMessage(), e);
+        return new ErrorResponse(e.getMessage());
+    }
+
     @ExceptionHandler(DuplicateEmailException.class)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ErrorResponse handleThrowable(final DuplicateEmailException e) {
         log.error("204 {}", e.getMessage(), e);
+        return new ErrorResponse(e.getMessage());
+    }
+
+    @ExceptionHandler(IncorrectDataException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse handleThrowable(final IncorrectDataException    e) {
+        log.error("400 {}", e.getMessage(), e);
+        return new ErrorResponse(e.getMessage());
+    }
+
+    @ExceptionHandler(UnsupportedStatusException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ErrorResponse handleThrowable(final UnsupportedStatusException    e) {
+        log.error("500 {}", e.getMessage(), e);
         return new ErrorResponse(e.getMessage());
     }
 }
