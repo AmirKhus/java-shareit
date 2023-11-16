@@ -8,7 +8,6 @@ import ru.practicum.shareit.user.entity.User;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
 
 @Data
 @Builder
@@ -17,9 +16,9 @@ import java.io.Serializable;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "items")
-public class Item{
+public class Item {
     @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank(groups = {MarkerValidate.OnCreate.class})
     private String name;
