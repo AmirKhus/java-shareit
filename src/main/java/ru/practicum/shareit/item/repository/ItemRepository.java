@@ -7,8 +7,9 @@ import org.springframework.stereotype.Repository;
 import ru.practicum.shareit.item.entity.Item;
 
 import java.util.List;
+
 @Repository
-public interface ItemRepository extends JpaRepository<Item,Long> {
+public interface ItemRepository extends JpaRepository<Item, Long> {
     List<Item> findByUserId(long userId);
 
     List<Item> findByUserIdOrderById(Long userId, PageRequest pageRequest);

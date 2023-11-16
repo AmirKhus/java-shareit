@@ -1,7 +1,6 @@
 package ru.practicum.shareit.item.dto;
 
 import ru.practicum.shareit.item.model.Item;
-import ru.practicum.shareit.request.ItemRequest;
 import ru.practicum.shareit.user.User;
 
 import java.util.ArrayList;
@@ -47,7 +46,6 @@ public class ItemMapper {
                 .user(user)
                 .build();
     }
-
 
 
     public static ru.practicum.shareit.item.entity.Item fromEntityItemDto(ItemDto itemDto, ru.practicum.shareit.user.entity.User user) {

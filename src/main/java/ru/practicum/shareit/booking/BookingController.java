@@ -1,6 +1,5 @@
 package ru.practicum.shareit.booking;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -27,13 +26,13 @@ public class BookingController {
     public BookingOutDto addBookings(@RequestHeader(HEADER_USER_ID) Long userId,
                                      @Validated(MarkerValidate.OnCreate.class) @NotNull @RequestBody BookingDto bookingDto) {
         log.info("User {}, add new booking {}", userId, "bookingDto.getName()");
-        return bookingService.addBooking(bookingDto,userId);
+        return bookingService.addBooking(bookingDto, userId);
     }
 
     @PatchMapping("/{bookingId}")
     public BookingOutDto confirmationBooking(@RequestHeader(HEADER_USER_ID) Long userId,
-                                          @PathVariable Long bookingId,
-                                          @RequestParam(value = "approved") Boolean approved) {
+                                             @PathVariable Long bookingId,
+                                             @RequestParam(value = "approved") Boolean approved) {
         log.info("User {}, changed the status booking {}", userId, bookingId);
         return bookingService.confirmationBooking(userId, bookingId, approved);
     }
@@ -50,7 +49,7 @@ public class BookingController {
 
     @GetMapping
     public List<BookingOutDto> getAllBrookingByBookerId(@RequestHeader(HEADER_USER_ID) Long userId,
-                                                       @RequestParam(value = "state", defaultValue = "ALL") String state) {
+                                                        @RequestParam(value = "state", defaultValue = "ALL") String state) {
         log.info("Get all bookings by booker Id {}", userId);
         return bookingService.getAllBrookingByBookerId(userId, state);
     }

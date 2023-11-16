@@ -5,7 +5,8 @@ import org.springframework.stereotype.Repository;
 import ru.practicum.shareit.comment.entity.Comment;
 
 import java.util.List;
+
 @Repository
-public interface CommentRepository extends JpaRepository<Comment,Long> {
+public interface CommentRepository extends JpaRepository<Comment, Long> {
     List<Comment> findAllByItemId(Long itemId);
 }

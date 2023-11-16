@@ -3,22 +3,18 @@ package ru.practicum.shareit.user.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.MethodArgumentNotValidException;
-import ru.practicum.shareit.exception.BadRequestException;
 import ru.practicum.shareit.exception.ConflictException;
 import ru.practicum.shareit.exception.NotFoundException;
-import ru.practicum.shareit.user.entity.User;
-import ru.practicum.shareit.user.dao.UserDao;
 import ru.practicum.shareit.user.dto.UserDto;
 import ru.practicum.shareit.user.dto.UserMapper;
+import ru.practicum.shareit.user.entity.User;
 import ru.practicum.shareit.user.repository.UserRepository;
 
 import javax.transaction.Transactional;
-import javax.validation.ValidationException;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import static ru.practicum.shareit.user.dto.UserMapper.*;
+import static ru.practicum.shareit.user.dto.UserMapper.fromEntityUserDto;
+import static ru.practicum.shareit.user.dto.UserMapper.toUserDtoList;
 
 @Service
 @RequiredArgsConstructor

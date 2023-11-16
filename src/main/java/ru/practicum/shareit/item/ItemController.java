@@ -2,7 +2,6 @@ package ru.practicum.shareit.item;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.shareit.MarkerValidate;
@@ -27,7 +26,7 @@ public class ItemController {
                                          @RequestParam(required = false, defaultValue = "0") Integer from,
                                          @RequestParam(required = false, defaultValue = "10") Integer size) {
         log.info("List items User {}", userId);
-        return itemService.getItemsUser(userId,from,size);
+        return itemService.getItemsUser(userId, from, size);
     }
 
     @GetMapping("/{itemId}")
@@ -40,7 +39,7 @@ public class ItemController {
     public List<ItemDto> searchItems(@RequestParam String text,
                                      @RequestParam(required = false, defaultValue = "0") Integer from,
                                      @RequestParam(required = false, defaultValue = "10") Integer size) {
-        return itemService.search(text,from,size);
+        return itemService.search(text, from, size);
     }
 
     @PostMapping
@@ -63,8 +62,8 @@ public class ItemController {
 
     @PostMapping("/{itemId}/comment")
     public CommentDto addComment(@RequestHeader(HEADER_USER_ID) Long userId,
-                                                 @PathVariable Long itemId,
-                                                 @RequestBody CommentDto commentDto) {
+                                 @PathVariable Long itemId,
+                                 @RequestBody CommentDto commentDto) {
 
         log.info("User {} add comment for Item {}", userId, itemId);
         return itemService.addComment(userId, itemId, commentDto);

@@ -6,7 +6,6 @@ import ru.practicum.shareit.user.entity.User;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.sql.Date;
 import java.time.LocalDateTime;
 
 @Data

@@ -7,6 +7,7 @@ import ru.practicum.shareit.booking.entity.Booking;
 import ru.practicum.shareit.booking.entity.Status;
 import ru.practicum.shareit.booking.repository.BookingRepository;
 import ru.practicum.shareit.comment.dto.CommentDto;
+import ru.practicum.shareit.comment.dto.CommentMapper;
 import ru.practicum.shareit.comment.entity.Comment;
 import ru.practicum.shareit.comment.repository.CommentRepository;
 import ru.practicum.shareit.exception.BadRequestException;
@@ -18,7 +19,6 @@ import ru.practicum.shareit.item.repository.ItemRepository;
 import ru.practicum.shareit.request.repository.ItemRequestRepository;
 import ru.practicum.shareit.user.entity.User;
 import ru.practicum.shareit.user.repository.UserRepository;
-import ru.practicum.shareit.comment.dto.CommentMapper ;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static ru.practicum.shareit.booking.dto.BookingMapper.toBookingShortDto;
-import static ru.practicum.shareit.comment.dto.CommentMapper.*;
+import static ru.practicum.shareit.comment.dto.CommentMapper.toCommentDtoList;
 import static ru.practicum.shareit.item.dto.ItemMapper.*;
 
 @Service
@@ -45,9 +45,9 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public ItemDto getById(Long id) {
-    Item item = itemRepository.findById(id)
-            .orElseThrow(() -> new NotFoundException("Item with id = " + id + " not found"));
-    return ItemMapper.toEntityItemDto(item);
+        Item item = itemRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Item with id = " + id + " not found"));
+        return ItemMapper.toEntityItemDto(item);
     }
 
     @Transactional
@@ -102,7 +102,8 @@ public class ItemServiceImpl implements ItemService {
 
         itemRepository.save(newItem);
 
-        return toEntityItemDto(newItem);    }
+        return toEntityItemDto(newItem);
+    }
 
     @Override
     public void delete(Long id) {
@@ -219,7 +220,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public CommentDto addComment(Long userId, Long itemId, CommentDto commentDto) {
         User user = getUserById(userId);
-        if(commentDto.getText().isEmpty())
+        if (commentDto.getText().isEmpty())
             throw new BadRequestException("Пустое сообщение");
         Item item = itemRepository.findById(itemId).orElseThrow(() ->
                 new EntityNotFoundException(String.format("Объект класса %s не найден", Item.class)));
@@ -272,7 +273,7 @@ public class ItemServiceImpl implements ItemService {
         return resultList;
     }
 
-    private void checkUser(Long userId){
+    private void checkUser(Long userId) {
         if (!userRepository.existsById(userId)) {
             throw new NotFoundException("User id " + userId + " not found.");
         }

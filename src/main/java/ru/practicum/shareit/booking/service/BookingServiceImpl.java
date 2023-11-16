@@ -9,20 +9,22 @@ import ru.practicum.shareit.booking.dto.BookingOutDto;
 import ru.practicum.shareit.booking.entity.Booking;
 import ru.practicum.shareit.booking.entity.Status;
 import ru.practicum.shareit.booking.repository.BookingRepository;
-import ru.practicum.shareit.exception.*;
+import ru.practicum.shareit.exception.IncorrectDataException;
+import ru.practicum.shareit.exception.NotFoundException;
+import ru.practicum.shareit.exception.UnsupportedStatusException;
 import ru.practicum.shareit.item.entity.Item;
 import ru.practicum.shareit.item.repository.ItemRepository;
 import ru.practicum.shareit.user.entity.User;
 import ru.practicum.shareit.user.repository.UserRepository;
 
-import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import javax.validation.ValidationException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
-import static ru.practicum.shareit.booking.dto.BookingMapper.*;
+import static ru.practicum.shareit.booking.dto.BookingMapper.toBookingDto;
+import static ru.practicum.shareit.booking.dto.BookingMapper.toBookingDtoList;
 
 @Service
 @Transactional
@@ -86,12 +88,13 @@ public class BookingServiceImpl implements BookingService {
                 throw new IncorrectDataException("Status is Approved");
             }
             booking.setStatus(Status.APPROVED);
-        }else {
-            booking.setStatus   (Status.REJECTED);
+        } else {
+            booking.setStatus(Status.REJECTED);
         }
         bookingRepository.save(booking);
         return toBookingDto(booking);
     }
+
     @Transactional
     @Override
     public List<BookingOutDto> getAllBrookingByBookerId(Long userId, String state) {
@@ -111,11 +114,11 @@ public class BookingServiceImpl implements BookingService {
                 bookings = bookingRepository.findAllByBookerIdOrderByStartDesc(userId);
                 break;
             case CURRENT:
-                bookings = bookingRepository.
-                        findAllByBookerIdAndStartBeforeAndEndAfterOrderByStartAsc(userId, localDate,localDate);
+                bookings = bookingRepository
+                        .findAllByBookerIdAndStartBeforeAndEndAfterOrderByStartAsc(userId, localDate, localDate);
                 break;
             case PAST:
-                bookings = bookingRepository.findAllByBookerIdAndEndBeforeOrderByStartDesc(userId,localDate);
+                bookings = bookingRepository.findAllByBookerIdAndEndBeforeOrderByStartDesc(userId, localDate);
                 break;
             case FUTURE:
                 bookings = bookingRepository.findAllByBookerIdAndStartAfterOrderByStartDesc(userId, localDate);
@@ -154,8 +157,8 @@ public class BookingServiceImpl implements BookingService {
                 bookings = bookingRepository.findAllByItemUserIdOrderByStartDesc(userId);
                 break;
             case CURRENT:
-                bookings = bookingRepository.
-                        findAllByItemUserIdAndStartBeforeAndEndAfterOrderByStartAsc(userId, localDate, localDate);
+                bookings = bookingRepository
+                        .findAllByItemUserIdAndStartBeforeAndEndAfterOrderByStartAsc(userId, localDate, localDate);
                 break;
             case PAST:
                 bookings = bookingRepository.findAllByItemUserIdAndEndBeforeOrderByStartDesc(userId, localDate);
@@ -184,7 +187,7 @@ public class BookingServiceImpl implements BookingService {
         if (booking.getBooker().getId().equals(userId) || booking.getItem().getUser().getId().equals(userId)) {
             return BookingMapper.toBookingDto(booking);
         } else {
-                throw new NotFoundException("To get information about the reservation, the car of the reservation or the owner {} " + userId + "of the item can");
+            throw new NotFoundException("To get information about the reservation, the car of the reservation or the owner {} " + userId + "of the item can");
         }
     }
 
@@ -196,7 +199,7 @@ public class BookingServiceImpl implements BookingService {
         return itemRepository.findById(itemId).orElseThrow(() -> new NotFoundException("There is no item with id: " + itemId));
     }
 
-    private Booking getBookingById(Long bookingId){
+    private Booking getBookingById(Long bookingId) {
         return bookingRepository.findById(bookingId).orElseThrow(() -> new NotFoundException("There is no Booking with id: " + bookingId));
     }
 }

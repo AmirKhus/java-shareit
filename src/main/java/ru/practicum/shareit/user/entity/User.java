@@ -4,7 +4,6 @@ import lombok.*;
 import ru.practicum.shareit.MarkerValidate;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 @Data
@@ -16,7 +15,7 @@ import javax.validation.constraints.NotBlank;
 @Table(name = "users")
 public class User {
     @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank(groups = MarkerValidate.OnCreate.class)
     @Column(name = "name", nullable = false)
