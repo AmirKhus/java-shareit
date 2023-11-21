@@ -6,7 +6,6 @@ import ru.practicum.shareit.user.entity.User;
 
 import java.util.List;
 
-@Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findByEmail(String email);
 }
