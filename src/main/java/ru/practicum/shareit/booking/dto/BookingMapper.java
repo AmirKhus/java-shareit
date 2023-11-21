@@ -9,6 +9,7 @@ import ru.practicum.shareit.user.dto.UserMapper;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class BookingMapper {
     public static Booking fromBookingDto(BookingDto bookingDto) {
