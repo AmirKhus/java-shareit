@@ -6,7 +6,8 @@ import ru.practicum.shareit.MarkerValidate;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
-@Data
+@Setter
+@Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
