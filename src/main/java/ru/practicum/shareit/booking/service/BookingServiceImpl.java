@@ -68,7 +68,6 @@ public class BookingServiceImpl implements BookingService {
         }
         booking.setStatus(Status.WAITING);
         bookingRepository.save(booking);
-        System.err.println(booking.getBooker());
         return toBookingDto(booking);
     }
 
