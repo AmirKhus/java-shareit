@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import ru.practicum.shareit.Constant;
 import ru.practicum.shareit.MarkerValidate;
 import ru.practicum.shareit.booking.dto.BookingDto;
 import ru.practicum.shareit.booking.dto.BookingOutDto;
@@ -20,7 +21,7 @@ import java.util.List;
 public class BookingController {
     @Autowired
     private BookingService bookingService;
-    private static final String HEADER_USER_ID = "X-Sharer-User-Id";
+    private static final String HEADER_USER_ID = Constant.HEADER_USER_ID;
 
     @PostMapping()
     public BookingOutDto addBookings(@RequestHeader(HEADER_USER_ID) Long userId,
