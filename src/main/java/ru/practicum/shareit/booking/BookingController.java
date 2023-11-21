@@ -56,7 +56,7 @@ public class BookingController {
 
     @GetMapping("/owner")
     public List<BookingOutDto> getAllBookingsForAllItemsByOwnerId(@RequestHeader(HEADER_USER_ID) Long userId,
-                                                                  @RequestParam(defaultValue = "ALL", required = false) String state) {
+                                                                  @RequestParam(defaultValue = "ALL") String state) {
 
         log.info("Get all bookings for all items by owner Id {}", userId);
         return bookingService.getAllBookingsForAllItemsByOwnerId(userId, state);
