@@ -186,7 +186,7 @@ public class BookingServiceImpl implements BookingService {
         if (booking.getBooker().getId().equals(userId) || booking.getItem().getUser().getId().equals(userId)) {
             return BookingMapper.toBookingDto(booking);
         } else {
-            throw new NotFoundException("To get information about the reservation, the car of the reservation or the owner {} " + userId + "of the item can");
+            throw new NotFoundException("To get information about the reservation, the item of the reservation or the owner {} " + userId + "of the item can");
         }
     }
 
