@@ -75,6 +75,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
         userRepository.delete(
                 userRepository.findById(id).orElseThrow(() -> new NotFoundException("There is no user with id: " + id)));

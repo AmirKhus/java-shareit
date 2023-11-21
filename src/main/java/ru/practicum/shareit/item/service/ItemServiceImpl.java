@@ -106,6 +106,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
         itemRepository.delete(getItemById(id));
     }
@@ -218,6 +219,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
+    @Transactional
     public CommentDto addComment(Long userId, Long itemId, CommentDto commentDto) {
         User user = getUserById(userId);
         if (commentDto.getText().isEmpty())
