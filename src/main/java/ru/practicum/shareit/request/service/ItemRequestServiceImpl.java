@@ -4,18 +4,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.shareit.Utils;
 import ru.practicum.shareit.exception.BadRequestException;
 import ru.practicum.shareit.exception.NotFoundException;
+import ru.practicum.shareit.item.dto.ItemMapper;
 import ru.practicum.shareit.item.entity.Item;
 import ru.practicum.shareit.item.repository.ItemRepository;
 import ru.practicum.shareit.request.dto.ItemRequestDto;
 import ru.practicum.shareit.request.dto.ItemRequestMapper;
 import ru.practicum.shareit.request.entity.ItemRequest;
-import ru.practicum.shareit.item.dto.ItemMapper;
-
-import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.shareit.request.repository.ItemRequestRepository;
 import ru.practicum.shareit.user.entity.User;
 import ru.practicum.shareit.user.repository.UserRepository;
@@ -33,10 +31,10 @@ public class ItemRequestServiceImpl implements ItemRequestService {
 
     @Override
     public ItemRequestDto addRequest(ItemRequestDto itemRequestDto, long userId) {
-        if(itemRequestDto.getDescription() == null)
+        if (itemRequestDto.getDescription() == null)
             throw new BadRequestException("Description must not be null");
 
-        if(itemRequestDto.getDescription().isEmpty())
+        if (itemRequestDto.getDescription().isEmpty())
             throw new BadRequestException("Description must not be zero");
 
         checkUser(userId);
@@ -52,7 +50,7 @@ public class ItemRequestServiceImpl implements ItemRequestService {
 
     @Override
     public List<ItemRequestDto> getAllRequests(Long userId, Integer from, Integer size) {
-        PageRequest pageRequest = Utils.checkPageSize(from,size);
+        PageRequest pageRequest = Utils.checkPageSize(from, size);
 
         Page<ItemRequest> itemRequests = itemRequestRepository.findByIdIsNotOrderByCreatedAsc(userId, pageRequest);
 
@@ -90,7 +88,7 @@ public class ItemRequestServiceImpl implements ItemRequestService {
     @Override
     public ItemRequestDto addItemsToRequest(ItemRequest itemRequest) {
 
-        if(itemRequest.getDescription().isEmpty())
+        if (itemRequest.getDescription().isEmpty())
             throw new BadRequestException("Description must not be zero");
 
         ItemRequestDto itemRequestDto = ItemRequestMapper.returnItemRequestDto(itemRequest);

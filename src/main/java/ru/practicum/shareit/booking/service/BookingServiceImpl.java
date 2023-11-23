@@ -114,23 +114,23 @@ public class BookingServiceImpl implements BookingService {
 
         switch (stateEnum) {
             case ALL:
-                bookings = bookingRepository.findAllByBookerIdOrderByStartDesc(userId,pageRequest);
+                bookings = bookingRepository.findAllByBookerIdOrderByStartDesc(userId, pageRequest);
                 break;
             case CURRENT:
                 bookings = bookingRepository
-                        .findAllByBookerIdAndStartBeforeAndEndAfterOrderByStartAsc(userId, localDate, localDate,pageRequest);
+                        .findAllByBookerIdAndStartBeforeAndEndAfterOrderByStartAsc(userId, localDate, localDate, pageRequest);
                 break;
             case PAST:
-                bookings = bookingRepository.findAllByBookerIdAndEndBeforeOrderByStartDesc(userId, localDate,pageRequest);
+                bookings = bookingRepository.findAllByBookerIdAndEndBeforeOrderByStartDesc(userId, localDate, pageRequest);
                 break;
             case FUTURE:
-                bookings = bookingRepository.findAllByBookerIdAndStartAfterOrderByStartDesc(userId, localDate,pageRequest);
+                bookings = bookingRepository.findAllByBookerIdAndStartAfterOrderByStartDesc(userId, localDate, pageRequest);
                 break;
             case WAITING:
-                bookings = bookingRepository.findAllByBookerIdAndStatusOrderByStartDesc(userId, Status.WAITING,pageRequest);
+                bookings = bookingRepository.findAllByBookerIdAndStatusOrderByStartDesc(userId, Status.WAITING, pageRequest);
                 break;
             case REJECTED:
-                bookings = bookingRepository.findAllByBookerIdAndStatusOrderByStartDesc(userId, Status.REJECTED,pageRequest);
+                bookings = bookingRepository.findAllByBookerIdAndStatusOrderByStartDesc(userId, Status.REJECTED, pageRequest);
                 break;
             default:
                 throw new NotFoundException("Booking status not found");
@@ -144,7 +144,7 @@ public class BookingServiceImpl implements BookingService {
         getUserById(userId);
 
         PageRequest pageRequest = Utils.checkPageSize(from, size);
-        
+
         if (itemRepository.findByUserId(userId).isEmpty()) {
             throw new ValidationException("User does not have items to booking");
         }
@@ -159,23 +159,23 @@ public class BookingServiceImpl implements BookingService {
 
         switch (stateEnum) {
             case ALL:
-                bookings = bookingRepository.findAllByItemUserIdOrderByStartDesc(userId,pageRequest);
+                bookings = bookingRepository.findAllByItemUserIdOrderByStartDesc(userId, pageRequest);
                 break;
             case CURRENT:
                 bookings = bookingRepository
-                        .findAllByItemUserIdAndStartBeforeAndEndAfterOrderByStartAsc(userId, localDate, localDate,pageRequest);
+                        .findAllByItemUserIdAndStartBeforeAndEndAfterOrderByStartAsc(userId, localDate, localDate, pageRequest);
                 break;
             case PAST:
-                bookings = bookingRepository.findAllByItemUserIdAndEndBeforeOrderByStartDesc(userId, localDate,pageRequest);
+                bookings = bookingRepository.findAllByItemUserIdAndEndBeforeOrderByStartDesc(userId, localDate, pageRequest);
                 break;
             case FUTURE:
-                bookings = bookingRepository.findAllByItemUserIdAndStartAfterOrderByStartDesc(userId, localDate,pageRequest);
+                bookings = bookingRepository.findAllByItemUserIdAndStartAfterOrderByStartDesc(userId, localDate, pageRequest);
                 break;
             case WAITING:
-                bookings = bookingRepository.findAllByItemUserIdAndStatusOrderByStartDesc(userId, Status.WAITING,pageRequest);
+                bookings = bookingRepository.findAllByItemUserIdAndStatusOrderByStartDesc(userId, Status.WAITING, pageRequest);
                 break;
             case REJECTED:
-                bookings = bookingRepository.findAllByItemUserIdAndStatusOrderByStartDesc(userId, Status.REJECTED,pageRequest);
+                bookings = bookingRepository.findAllByItemUserIdAndStatusOrderByStartDesc(userId, Status.REJECTED, pageRequest);
                 break;
             default:
                 throw new NotFoundException("Booking status not found");
