@@ -3,6 +3,7 @@ package ru.practicum.shareit.item.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import ru.practicum.shareit.Utils;
 import ru.practicum.shareit.booking.entity.Booking;
 import ru.practicum.shareit.booking.entity.Status;
 import ru.practicum.shareit.booking.repository.BookingRepository;
@@ -114,7 +115,7 @@ public class ItemServiceImpl implements ItemService {
     @Transactional
     @Override
     public List<ItemDto> getItemByUser(Long userId, Integer from, Integer size) {
-        PageRequest pageRequest = PageRequest.of(from / size, size);
+        PageRequest pageRequest = Utils.checkPageSize(from,size);
 
         List<ItemDto> resultList = new ArrayList<>();
 
@@ -157,7 +158,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     @Transactional
     public List<ItemDto> search(String text, Integer from, Integer size) {
-        PageRequest pageRequest = PageRequest.of(from / size, size);
+        PageRequest pageRequest = Utils.checkPageSize(from,size);
 
         if (text.isEmpty()) {
             return Collections.emptyList();
@@ -237,7 +238,7 @@ public class ItemServiceImpl implements ItemService {
     public List<ItemDto> getItemsUser(Long userId, Integer from, Integer size) {
         checkUser(userId);
 
-        PageRequest pageRequest = PageRequest.of(from / size, size);
+        PageRequest pageRequest = Utils.checkPageSize(from,size);
 
         List<ItemDto> resultList = new ArrayList<>();
 

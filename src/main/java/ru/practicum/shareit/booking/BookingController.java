@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ru.practicum.shareit.Constant;
+import ru.practicum.shareit.Utils;
 import ru.practicum.shareit.MarkerValidate;
 import ru.practicum.shareit.booking.dto.BookingDto;
 import ru.practicum.shareit.booking.dto.BookingOutDto;
@@ -21,7 +21,7 @@ import java.util.List;
 public class BookingController {
     @Autowired
     private BookingService bookingService;
-    private static final String HEADER_USER_ID = Constant.HEADER_USER_ID;
+    private static final String HEADER_USER_ID = Utils.HEADER_USER_ID;
 
     @PostMapping()
     public BookingOutDto addBookings(@RequestHeader(HEADER_USER_ID) Long userId,
@@ -50,17 +50,21 @@ public class BookingController {
 
     @GetMapping
     public List<BookingOutDto> getAllBrookingByBookerId(@RequestHeader(HEADER_USER_ID) Long userId,
-                                                        @RequestParam(value = "state", defaultValue = "ALL") String state) {
+                                                        @RequestParam(defaultValue = "ALL", required = false) String state,
+                                                        @RequestParam(defaultValue = "0", required = false) Integer from,
+                                                        @RequestParam(defaultValue = "10", required = false) Integer size) {
         log.info("Get all bookings by booker Id {}", userId);
-        return bookingService.getAllBrookingByBookerId(userId, state);
+        return bookingService.getAllBrookingByBookerId(userId, state, from, size);
     }
 
     @GetMapping("/owner")
     public List<BookingOutDto> getAllBookingsForAllItemsByOwnerId(@RequestHeader(HEADER_USER_ID) Long userId,
-                                                                  @RequestParam(defaultValue = "ALL") String state) {
+                                                                  @RequestParam(defaultValue = "ALL", required = false) String state,
+                                                                  @RequestParam(defaultValue = "0", required = false) Integer from,
+                                                                  @RequestParam(defaultValue = "10", required = false) Integer size) {
 
         log.info("Get all bookings for all items by owner Id {}", userId);
-        return bookingService.getAllBookingsForAllItemsByOwnerId(userId, state);
+        return bookingService.getAllBookingsForAllItemsByOwnerId(userId, state, from, size);
     }
 
 }
