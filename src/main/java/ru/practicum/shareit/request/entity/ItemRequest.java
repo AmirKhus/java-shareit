@@ -6,6 +6,7 @@ import ru.practicum.shareit.user.entity.User;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Setter
@@ -20,7 +21,8 @@ public class ItemRequest {
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Long id;
-    @NotBlank(groups = {MarkerValidate.OnCreate.class})
+//    @NotBlank(groups = {MarkerValidate.OnCreate.class})
+//    @NotNull(groups = {MarkerValidate.OnCreate.class})
     private String description;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "requester_id", nullable = false)
