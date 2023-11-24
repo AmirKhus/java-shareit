@@ -92,7 +92,7 @@ public class ItemRequestServiceImpl implements ItemRequestService {
             throw new BadRequestException("Description must not be zero");
 
         ItemRequestDto itemRequestDto = ItemRequestMapper.returnItemRequestDto(itemRequest);
-        List<Item> items = itemRepository.findByUserId(itemRequest.getId());
+        List<Item> items = itemRepository.findByRequestId(itemRequest.getId());
         itemRequestDto.setItems(ItemMapper.toItemDtoList(items));
 
         return itemRequestDto;
