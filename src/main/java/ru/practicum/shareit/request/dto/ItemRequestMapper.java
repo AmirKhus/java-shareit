@@ -5,7 +5,6 @@ import ru.practicum.shareit.user.entity.User;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class ItemRequestMapper {
