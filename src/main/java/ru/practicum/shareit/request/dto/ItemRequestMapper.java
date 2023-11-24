@@ -14,7 +14,7 @@ public class ItemRequestMapper {
                 .id(itemRequest.getId())
                 .description(itemRequest.getDescription())
                 .created(itemRequest.getCreated())
-                .items(Collections.emptyList())
+                .items(null)
                 .build();
         return itemRequestDto;
     }
