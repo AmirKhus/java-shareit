@@ -55,10 +55,10 @@ public class BookingServiceImpl implements BookingService {
             throw new NotFoundException("Owner " + userId + " can't book his item");
         }
         if (!item.getAvailable()) {
-            throw new ValidationException("Item " + item.getId() + " is booked");
+            throw new IncorrectDataException("Item " + item.getId() + " is booked");
         }
         if (booking.getStart().isAfter(booking.getEnd())) {
-            throw new ValidationException("Start cannot be later than end");
+            throw new IncorrectDataException("Start cannot be later than end");
         }
 
         if (bookingDto.getStart() == null || bookingDto.getEnd() == null) {
