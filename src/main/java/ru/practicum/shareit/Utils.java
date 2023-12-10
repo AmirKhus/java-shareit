@@ -10,7 +10,7 @@ public class Utils {
     public static PageRequest checkPageSize(Integer from, Integer size) {
 
         if (from == 0 && size == 0) {
-            throw new ValidationException("\"size\" and \"from\"must be not equal 0");
+            throw new ValidationException("\"size\" and \"from\" must be not equal 0");
         }
 
         if (size <= 0) {

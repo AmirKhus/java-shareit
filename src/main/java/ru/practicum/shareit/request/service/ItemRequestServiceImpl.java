@@ -41,11 +41,11 @@ public class ItemRequestServiceImpl implements ItemRequestService {
 
         User user = userRepository.findById(userId).get();
 
-        ItemRequest itemRequest = ItemRequestMapper.returnItemRequest(itemRequestDto, user);
+        ItemRequest itemRequest = ItemRequestMapper.toItemRequest(itemRequestDto, user);
 
         itemRequest = itemRequestRepository.save(itemRequest);
 
-        return ItemRequestMapper.returnItemRequestDto(itemRequest);
+        return ItemRequestMapper.fromItemRequestDto(itemRequest);
     }
 
     @Override
@@ -91,7 +91,7 @@ public class ItemRequestServiceImpl implements ItemRequestService {
         if (itemRequest.getDescription().isEmpty())
             throw new BadRequestException("Description must not be zero");
 
-        ItemRequestDto itemRequestDto = ItemRequestMapper.returnItemRequestDto(itemRequest);
+        ItemRequestDto itemRequestDto = ItemRequestMapper.fromItemRequestDto(itemRequest);
         List<Item> items = itemRepository.findByRequestId(itemRequest.getId());
         itemRequestDto.setItems(ItemMapper.toItemDtoList(items));
 
