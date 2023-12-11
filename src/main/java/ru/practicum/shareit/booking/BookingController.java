@@ -50,18 +50,18 @@ public class BookingController {
 
     @GetMapping
     public List<BookingOutDto> getAllBrookingByBookerId(@RequestHeader(HEADER_USER_ID) Long userId,
-                                                        @RequestParam(defaultValue = "ALL", required = false) String state,
-                                                        @RequestParam(defaultValue = "0", required = false) Integer from,
-                                                        @RequestParam(defaultValue = "10", required = false) Integer size) {
+                                                        @RequestParam(defaultValue = "ALL") String state,
+                                                        @RequestParam(defaultValue = "0") Integer from,
+                                                        @RequestParam(defaultValue = "10") Integer size) {
         log.info("Get all bookings by booker Id {}", userId);
         return bookingService.getAllBrookingByBookerId(userId, state, from, size);
     }
 
     @GetMapping("/owner")
     public List<BookingOutDto> getAllBookingsForAllItemsByOwnerId(@RequestHeader(HEADER_USER_ID) Long userId,
-                                                                  @RequestParam(defaultValue = "ALL", required = false) String state,
-                                                                  @RequestParam(defaultValue = "0", required = false) Integer from,
-                                                                  @RequestParam(defaultValue = "10", required = false) Integer size) {
+                                                                  @RequestParam(defaultValue = "ALL") String state,
+                                                                  @RequestParam(defaultValue = "0") Integer from,
+                                                                  @RequestParam(defaultValue = "10") Integer size) {
 
         log.info("Get all bookings for all items by owner Id {}", userId);
         return bookingService.getAllBookingsForAllItemsByOwnerId(userId, state, from, size);

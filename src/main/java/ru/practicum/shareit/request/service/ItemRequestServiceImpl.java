@@ -48,6 +48,7 @@ public class ItemRequestServiceImpl implements ItemRequestService {
         return ItemRequestMapper.fromItemRequestDto(itemRequest);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<ItemRequestDto> getAllRequests(Long userId, Integer from, Integer size) {
         PageRequest pageRequest = Utils.checkPageSize(from, size);
@@ -61,6 +62,8 @@ public class ItemRequestServiceImpl implements ItemRequestService {
         return result;
     }
 
+    @Transactional(readOnly = true)
+
     @Override
     public List<ItemRequestDto> getRequests(long userId) {
         checkUser(userId);
@@ -73,6 +76,8 @@ public class ItemRequestServiceImpl implements ItemRequestService {
         }
         return result;
     }
+
+    @Transactional(readOnly = true)
 
     @Override
     public ItemRequestDto getRequestById(long userId, long requestId) {

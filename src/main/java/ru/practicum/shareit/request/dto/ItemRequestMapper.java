@@ -1,5 +1,7 @@
 package ru.practicum.shareit.request.dto;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import ru.practicum.shareit.request.entity.ItemRequest;
 import ru.practicum.shareit.user.entity.User;
 
@@ -7,6 +9,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ItemRequestMapper {
     public static ItemRequestDto fromItemRequestDto(ItemRequest itemRequest) {
         ItemRequestDto itemRequestDto = ItemRequestDto.builder()

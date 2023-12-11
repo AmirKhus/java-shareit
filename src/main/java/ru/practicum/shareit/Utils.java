@@ -1,9 +1,11 @@
 package ru.practicum.shareit;
 
+import lombok.experimental.UtilityClass;
 import org.springframework.data.domain.PageRequest;
 
 import javax.validation.ValidationException;
 
+@UtilityClass
 public class Utils {
     public static final String HEADER_USER_ID = "X-Sharer-User-Id";
 
