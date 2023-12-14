@@ -1,25 +1,27 @@
 package ru.practicum.shareit.booking.dto;
 
-import java.time.LocalDateTime;
+import lombok.*;
 
 import javax.validation.constraints.Future;
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotNull;
-
-import lombok.*;
+import javax.validation.constraints.Positive;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class BookingDto {
 
-	private Long itemId;
+    @Positive
+    private long itemId;
 
-	@NotNull(message = "start cannot be empty.")
-	@FutureOrPresent(message = "start may be in the present or future")
-	private LocalDateTime start;
+    @NotNull(message = "Отсутствует начальная точка отсчета.")
+    @FutureOrPresent
+    private LocalDateTime start;
 
-	@NotNull(message = "end cannot be empty.")
-	@Future(message = "end may be in the future")
-	private LocalDateTime end;
-
+    @NotNull(message = "Отсутствует конечная точка отсчета.")
+    @Future
+    private LocalDateTime end;
 }

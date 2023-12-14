@@ -1,27 +1,22 @@
 package ru.practicum.shareit.request.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import ru.practicum.shareit.item.dto.ItemDto;
+import lombok.NoArgsConstructor;
+import ru.practicum.shareit.valid.Mark.*;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
-import java.util.List;
+import javax.validation.constraints.Size;
 
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class ItemRequestDto {
 
-    private long id;
-
-    @NotNull(message = "Description cannot be empty")
-    @NotBlank(message = "Description cannot be blank")
-    @NotEmpty
+    @NotBlank(groups = {Create.class}, message = "В запросе отсутствует описание запроса.")
+    @Size(groups = {Class.class, Update.class}, max = 2000,
+          message = "Максимальная длина описания 2000 символов.")
     private String description;
-
-    private LocalDateTime created;
-
-    private List<ItemDto> items;
 }
