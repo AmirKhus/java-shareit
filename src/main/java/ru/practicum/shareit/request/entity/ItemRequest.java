@@ -1,11 +1,9 @@
 package ru.practicum.shareit.request.entity;
 
 import lombok.*;
-import ru.practicum.shareit.MarkerValidate;
 import ru.practicum.shareit.user.entity.User;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 @Setter
@@ -18,9 +16,10 @@ import java.time.LocalDateTime;
 @Table(name = "requests")
 public class ItemRequest {
     @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank(groups = {MarkerValidate.OnCreate.class})
+    //    @NotBlank(groups = {MarkerValidate.OnCreate.class})
+//    @NotNull(groups = {MarkerValidate.OnCreate.class})
     private String description;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "requester_id", nullable = false)

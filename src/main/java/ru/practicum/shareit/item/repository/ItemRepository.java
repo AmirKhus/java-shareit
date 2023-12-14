@@ -19,4 +19,7 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
     List<Item> search(String text, PageRequest pageRequest);
 
     List<Item> findByUserId(Long userId);
+
+    List<Item> findByRequestId(Long requestId);
+
 }
