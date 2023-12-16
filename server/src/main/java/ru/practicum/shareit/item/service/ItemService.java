@@ -9,8 +9,8 @@ import ru.practicum.shareit.booking.model.Booking;
 import ru.practicum.shareit.booking.model.BookingStatus;
 import ru.practicum.shareit.booking.repository.BookingRepository;
 import ru.practicum.shareit.exceptions.ex.CheckUserException;
-import ru.practicum.shareit.exceptions.ex.ItemNotFoundException;
 import ru.practicum.shareit.exceptions.ex.NoAccessCommentException;
+import ru.practicum.shareit.exceptions.ex.NotFoundException;
 import ru.practicum.shareit.item.dto.CommentDto;
 import ru.practicum.shareit.item.dto.ItemDto;
 import ru.practicum.shareit.item.dto.ItemOwnerDto;
@@ -176,7 +176,7 @@ public class ItemService {
         Optional<Item> optionalItem = itemStorage.findById(itemId);
 
         if (optionalItem.isEmpty()) {
-            throw new ItemNotFoundException("Отсутствует вещь с id = " + itemId);
+            throw new NotFoundException("Отсутствует вещь с id = " + itemId);
         }
 
         return optionalItem.get().getAvailable();
@@ -206,7 +206,7 @@ public class ItemService {
 
     private void checkExistItem(long itemId) {
         if (itemStorage.findById(itemId).isEmpty()) {
-            throw new ItemNotFoundException("Отсутствует вещь с id = " + itemId);
+            throw new NotFoundException("Отсутствует вещь с id = " + itemId);
         }
     }
 }

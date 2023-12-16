@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.practicum.shareit.exceptions.ex.UserNotFoundException;
+import ru.practicum.shareit.exceptions.ex.NotFoundException;
 import ru.practicum.shareit.user.dto.UserDto;
 import ru.practicum.shareit.user.mapper.UserMapper;
 import ru.practicum.shareit.user.model.User;
@@ -61,7 +61,7 @@ public class UserService {
         log.info("Проверка юзера с id = " + userId);
         if (repository.findById(userId).isEmpty()) {
             log.info("Не нашли юзера с id = " + userId);
-            throw new UserNotFoundException(String.format("Пользователь с id = %d не существует", userId));
+            throw new NotFoundException(String.format("Пользователь с id = %d не существует", userId));
         }
     }
 }

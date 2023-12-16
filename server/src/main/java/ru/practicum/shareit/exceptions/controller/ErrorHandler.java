@@ -14,7 +14,7 @@ public class ErrorHandler {
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ErrorResponse handleUserNotFoundException(final UserNotFoundException e) {
+    public ErrorResponse handleUserNotFoundException(final NotFoundException e) {
         log.debug("Произошла ошибка {}", e.getMessage(), e);
         return new ErrorResponse(e.getMessage());
     }
@@ -28,7 +28,7 @@ public class ErrorHandler {
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ErrorResponse handleItemNotFoundException(final ItemNotFoundException e) {
+    public ErrorResponse handleItemNotFoundException(final NotFoundException e) {
         log.debug("Произошла ошибка {}", e.getMessage(), e);
         return new ErrorResponse(e.getMessage());
     }
@@ -42,7 +42,7 @@ public class ErrorHandler {
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ErrorResponse handleBookingNotFountException(final BookingNotFoundException e) {
+    public ErrorResponse handleBookingNotFountException(final NotFoundException e) {
         log.debug("Произошла ошибка {}", e.getMessage(), e);
         return new ErrorResponse(e.getMessage());
     }
@@ -84,7 +84,7 @@ public class ErrorHandler {
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ErrorResponse handleItemRequestFoundException(final ItemRequestNotFoundException e) {
+    public ErrorResponse handleItemRequestFoundException(final NotFoundException e) {
         log.debug("Произошла ошибка {}", e.getMessage(), e);
         return new ErrorResponse(e.getMessage());
     }

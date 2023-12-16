@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
-import ru.practicum.shareit.exceptions.ex.ItemRequestNotFoundException;
+import ru.practicum.shareit.exceptions.ex.NotFoundException;
 import ru.practicum.shareit.item.mapper.ItemMapper;
 import ru.practicum.shareit.item.repository.ItemRepository;
 import ru.practicum.shareit.request.dto.ItemRequestDto;
@@ -78,7 +78,7 @@ public class ItemRequestService {
         Optional<ItemRequest> optionalItemRequest = itemRequestStorage.findById(itemRequestId);
 
         if (optionalItemRequest.isEmpty()) {
-            throw new ItemRequestNotFoundException("Запроса с id " + itemRequestId + " не существует");
+            throw new NotFoundException("Запроса с id " + itemRequestId + " не существует");
         }
 
         return optionalItemRequest.get();

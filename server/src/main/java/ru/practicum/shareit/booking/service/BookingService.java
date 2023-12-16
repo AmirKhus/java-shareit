@@ -163,7 +163,7 @@ public class BookingService {
         Optional<Booking> optionalBooking = bookingStorage.findById(bookingId);
 
         if (optionalBooking.isEmpty()) {
-            throw new BookingNotFoundException(String.format("Аренда с id = %d не найдена.", bookingId));
+            throw new NotFoundException(String.format("Аренда с id = %d не найдена.", bookingId));
         }
 
         return optionalBooking.get();
